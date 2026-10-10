@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URN Universidad | Universidad Regional del Norte</title>
+<!--
+  GUÍA RÁPIDA PARA EDITAR
+  - Colores: variables en :root (más abajo en el CSS).
+  - Cambio de "página": la sección #por-que se muestra con :target (solo CSS, sin JavaScript).
+  - Textos marcados como "contenido de ejemplo" se pueden reemplazar con información oficial.
+  - Donde iría una foto hay bloques de color (no se usan imágenes).
+-->
+<style>
+/* ============ VARIABLES ============ */
+:root{
+  --violeta:#52217a;
+  --violeta-oscuro:#2e0f47;
+  --violeta-medio:#6a3a94;
+  --violeta-claro:#8a5ab5;
+  --lila:#efe8f6;
+  --oro:#c8962e;
+  --oro-claro:#e6bf63;
+  --naranja:#f08a24;
+  --texto:#4a4453;
+  --gris:#8a8490;
+  --verde-wa:#25b05a;
+  --fuente-titulo:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  --fuente-texto:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--fuente-texto);color:var(--texto);background:#fff;line-height:1.6;font-size:17px}
+h1,h2,h3,h4{font-family:var(--fuente-titulo);line-height:1.15;margin:0}
+a{color:inherit;text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+[id]{scroll-margin-top:86px}
+:focus-visible{outline:3px solid var(--naranja);outline-offset:2px}
+.sr{position:absolute;opacity:0;pointer-events:none}
+.wrap{width:min(1180px,92%);margin-inline:auto}
+.titulo-oro{color:var(--oro);font-weight:800;font-size:clamp(1.8rem,4vw,2.7rem)}
+
+/* ============ BARRA SUPERIOR ============ */
+.top{background:var(--violeta);color:#e9def3;font-size:.92rem}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:52px;flex-wrap:wrap}
+.top a:hover{color:#fff}
+.top-izq,.top-der{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.btn-test{background:var(--naranja);color:#fff;font-weight:800;text-align:center;line-height:1.15;padding:9px 20px;border-radius:0 0 12px 12px;font-size:.88rem}
+.btn-test:hover{background:#ff9d3d}
+.top-compact{display:none}
+.top-compact .wrap{width:min(1180px,94%);min-height:44px;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+.top-compact .redes a{font-size:1.1rem;padding:0 8px}
+
+/* ============ NAVEGACIÓN ============ */
+.nav{position:sticky;top:0;z-index:50;height:74px;background:#fff;box-shadow:0 2px 10px rgba(46,15,71,.15);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px)}
+.logo{display:flex;flex-direction:column;align-items:center;color:var(--violeta);line-height:1}
+.logo-urn{font-family:Georgia,"Times New Roman",serif;font-weight:900;font-size:2.3rem;letter-spacing:.04em;border-bottom:4px double currentColor;padding:0 4px 2px}
+.logo-uni{font-size:.62rem;font-weight:700;letter-spacing:.12em;margin-top:3px}
+.links{display:flex;gap:clamp(12px,2vw,34px);align-items:center}
+.links a{font-weight:600;color:var(--violeta-oscuro);padding:6px 2px;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.links a:hover{border-color:var(--oro)}
+.links a.activo{color:var(--naranja)}
+.burger{display:none;font-size:1.8rem;cursor:pointer;color:var(--violeta);padding:4px 10px;border:2px solid currentColor;border-radius:8px;line-height:1}
+
+/* ============ CAMBIO DE VISTA (SOLO CSS) ============ */
+#por-que{display:none}
+body:is(:has(#por-que:target),:has(#por-que :target)){
+  & #principal{display:none}
+  & #por-que{display:block}
+  & .top-full{display:none}
+  & .top-compact{display:block}
+  & .nav{background:var(--violeta)}
+  & .logo{color:#fff}
+  & .links a{color:#fff}
+  & .links a.activo{color:#fff;border-color:transparent}
+  & .links a.activo-por{color:var(--naranja);border-color:var(--naranja)}
+  & .burger{color:#fff}
+  & .up-main{display:none}
+  & .up-por{display:flex}
+}
+.up-por{display:none}
+
+/* ============ BOTONES FLOTANTES ============ */
+.wa{position:fixed;left:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:10px}
+.wa-icono{width:52px;height:52px;border-radius:50%;background:var(--verde-wa);color:#fff;display:grid;place-items:center;font-size:1.6rem;box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.wa-texto{background:#fff;color:#333;font-size:.85rem;padding:6px 10px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.up{position:fixed;right:16px;bottom:16px;z-index:60;width:44px;height:44px;background:var(--gris);color:#fff;border-radius:6px;align-items:center;justify-content:center;font-size:1.1rem;opacity:.9}
+.up:hover{background:var(--violeta)}
+
+/* ============ HERO ============ */
+.hero{position:relative;background:linear-gradient(140deg,var(--violeta-oscuro) 0%,var(--violeta) 55%,var(--violeta-claro) 100%);color:#fff;padding:70px 0 0;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px)}
+.hero::after{content:"";position:absolute;right:-8%;top:-30%;width:55%;height:160%;background:rgba(255,255,255,.06);transform:rotate(18deg)}
+.hero-copy{position:relative;z-index:1}
+.hero-pre{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;margin:0 0 8px}
+.hero h1{display:inline-block;background:var(--violeta-medio);border-left:12px solid var(--oro);padding:18px 30px;font-size:clamp(2.2rem,6vw,4.4rem);font-weight:800;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.campus-bar{position:relative;z-index:1;margin-top:90px}
+.campus-etiqueta{display:inline-block;background:var(--violeta-oscuro);color:#fff;font-weight:800;font-size:1.15rem;padding:10px 34px;border-radius:10px 10px 0 0}
+.campus-panel{background:#fff;display:grid;grid-template-columns:repeat(7,1fr);gap:8px;padding:12px;border-radius:0 12px 0 0}
+.campus-panel a{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:78px;padding:10px 6px;background:var(--lila);color:var(--violeta);font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.02em;border-radius:6px;transition:background .2s,color .2s}
+.campus-panel a:hover{background:var(--violeta);color:#fff}
+.cinta{position:absolute;top:6px;left:-6px;right:-6px;background:var(--oro);color:#fff;font-size:.62rem;padding:2px 0;transform:rotate(-7deg);box-shadow:0 2px 4px rgba(0,0,0,.3)}
+
+/* ============ BANNERS ============ */
+.banners{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:34px 0}
+.banner{display:flex;flex-direction:column;justify-content:flex-end;min-height:150px;padding:18px;border-radius:16px;color:#fff;font-weight:800;font-size:1.15rem;line-height:1.2;transition:transform .2s}
+.banner:hover{transform:translateY(-4px)}
+.banner small{display:inline-block;align-self:flex-start;background:var(--oro-claro);color:var(--violeta-oscuro);font-size:.7rem;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.banner:nth-child(1){background:linear-gradient(135deg,#1f2f5f,#3a2a7a)}
+.banner:nth-child(2){background:linear-gradient(135deg,var(--violeta),#9a4fa8)}
+.banner:nth-child(3){background:linear-gradient(135deg,#3b2a8f,#5a3bb5)}
+.banner:nth-child(4){background:linear-gradient(135deg,#102a52,#2b4f8f)}
+.banner .pildora{display:inline-block;background:var(--naranja);color:#fff;border-radius:20px;padding:4px 12px;font-size:.78rem;margin-top:8px;align-self:flex-start}
+
+/* ============ BIENVENIDA ============ */
+.bienvenida{display:grid;grid-template-columns:1fr 1fr;margin:20px auto 70px;width:min(1180px,92%);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(46,15,71,.2)}
+.bien-deco{position:relative;min-height:380px;background:linear-gradient(160deg,var(--violeta-claro),var(--violeta-oscuro));display:grid;place-items:center;overflow:hidden}
+.bien-deco::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 18px,transparent 18px 36px)}
+.bien-deco span{position:relative;font-family:Georgia,serif;font-weight:900;font-size:clamp(5rem,12vw,9rem);color:rgba(255,255,255,.9);letter-spacing:.05em}
+.bien-deco em{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#fff;font-style:normal;font-weight:700;letter-spacing:.05em}
+.bien-texto{background:var(--violeta);color:#e4d6f0;padding:clamp(28px,5vw,64px);display:flex;flex-direction:column;justify-content:center}
+.bien-texto h2{color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:18px}
+.bien-texto p{margin:0;font-size:1.05rem}
+
+/* ============ FILOSOFÍA (principal y página 2) ============ */
+.filosofia{background:linear-gradient(120deg,var(--violeta-oscuro),var(--violeta-medio));color:#fff;padding:64px 0}
+.filo-grid{display:grid;grid-template-columns:.8fr 1.6fr;gap:40px;align-items:center}
+.integra{text-align:center;position:relative}
+.petalos{position:relative;width:150px;height:130px;margin:0 auto -6px}
+.petalos i{position:absolute;width:58px;height:58px;border-radius:50% 50% 50% 8%}
+.petalos i:nth-child(1){background:#20a05a;left:14px;top:0}
+.petalos i:nth-child(2){background:#f5c21b;left:80px;top:0;border-radius:50% 50% 8% 50%}
+.petalos i:nth-child(3){background:#1fa0d8;left:0;top:54px}
+.petalos i:nth-child(4){background:#e8281c;left:92px;top:54px}
+.petalos i:nth-child(5){background:#8a3fb8;left:46px;top:70px;border-radius:50%}
+.integra b{display:block;font-family:"Brush Script MT","Segoe Script","Lucida Handwriting",cursive;font-style:italic;font-size:clamp(3rem,6vw,4.4rem);line-height:1}
+.integra strong{display:block;font-family:var(--fuente-titulo);font-size:clamp(2.6rem,5vw,3.8rem);line-height:1}
+.filo-texto h2{color:var(--oro-claro);font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px}
+.filo-texto .frase{font-size:1.25rem;font-style:italic;margin:0 0 18px}
+.filo-texto p{margin:0}
+.filo-texto p b{color:var(--oro-claro)}
+
+/* ============ BLOQUES 3x3 (PRINCIPAL) ============ */
+.bloques{display:grid;grid-template-columns:repeat(3,1fr);width:min(1180px,92%);margin:56px auto}
+.bloque-i{background:var(--violeta);padding:44px 28px;text-align:center;color:#e4d6f0;min-height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bloque-i:nth-child(even){background:var(--violeta-oscuro)}
+.bloque-i .ico{font-size:2.6rem;margin-bottom:10px}
+.bloque-i h3{color:#fff;font-size:1.15rem;margin-bottom:10px}
+.bloque-i p{margin:0;font-size:.95rem}
+
+/* ============ SECCIONES ANCLA ============ */
+.seccion{padding:64px 0}
+.seccion.gris{background:var(--lila)}
+.seccion .intro{max-width:70ch;margin:12px 0 28px}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chips li{background:#fff;border:2px solid var(--violeta);color:var(--violeta);font-weight:700;padding:10px 18px;border-radius:999px}
+.seccion.gris .chips li{background:#fff}
+.nota{font-size:.82rem;color:var(--gris);font-style:italic;margin-top:22px}
+.sedes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
+.sede{background:#fff;border-top:6px solid var(--oro);padding:22px;border-radius:0 0 12px 12px;box-shadow:0 4px 16px rgba(46,15,71,.12)}
+.sede h3{color:var(--violeta);margin-bottom:8px;font-size:1.2rem}
+.sede p{margin:0;font-size:.95rem}
+.sede a{color:var(--violeta);font-weight:700}
+.servicios{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:26px}
+.servicios li{background:var(--lila);border-radius:12px;padding:22px;text-align:center;font-weight:700;color:var(--violeta)}
+.servicios span{display:block;font-size:2rem}
+.contacto-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;margin-top:26px}
+.contacto-datos p{margin:0 0 10px}
+form.formulario{display:grid;gap:14px}
+.formulario label{font-weight:700;font-size:.9rem;color:var(--violeta)}
+.formulario input,.formulario select,.formulario textarea{width:100%;font:inherit;padding:11px 13px;border:2px solid #cfc3dc;border-radius:8px;background:#fff;color:var(--texto)}
+.formulario input:focus,.formulario select:focus,.formulario textarea:focus{border-color:var(--violeta);outline:none}
+.formulario input:user-valid,.formulario textarea:user-valid{border-color:#2a9d5c}
+.formulario input:user-invalid,.formulario textarea:user-invalid{border-color:#c93a3a}
+.fila-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn{display:inline-block;background:var(--oro);color:#fff;font-weight:800;border:0;border-radius:999px;padding:13px 32px;font:inherit;font-weight:800;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:var(--violeta);transform:translateY(-2px)}
+
+/* ============ PÁGINA 2: ¿POR QUÉ URN? ============ */
+.por-banner{position:relative;background:linear-gradient(120deg,var(--violeta-oscuro),var(--violeta));color:#fff;padding:clamp(70px,12vw,140px) 0 60px;overflow:hidden}
+.por-banner::before{content:"URN";position:absolute;right:-2%;top:-12%;font-family:Georgia,serif;font-weight:900;font-size:clamp(10rem,30vw,24rem);color:rgba(255,255,255,.06);line-height:1}
+.por-banner h1{position:relative;font-size:clamp(2.4rem,6.5vw,5rem);font-weight:800}
+.atajos{display:flex;flex-wrap:wrap;gap:12px;padding:20px 0}
+.atajos a{flex:1 1 180px;text-align:center;background:var(--violeta);color:#fff;font-weight:600;padding:12px 10px;border-radius:6px;transition:background .2s}
+.atajos a:hover{background:var(--naranja)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:min(1180px,92%);margin:34px auto 60px}
+.flip{perspective:1100px;height:290px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s ease}
+.flip:hover .flip-in,.flip:focus .flip-in,.flip:focus-within .flip-in{transform:rotateY(540deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;box-shadow:0 6px 18px rgba(46,15,71,.25)}
+.frente{background:linear-gradient(145deg,#1c2b4a,#2e1f55);color:var(--oro-claro)}
+.frente .ico{font-size:2.8rem;margin-bottom:10px}
+.frente h3{font-size:1.5rem;font-weight:700}
+.atras{background:var(--violeta);color:#e8dcf3;transform:rotateY(180deg)}
+.atras h3{color:#fff;font-size:1.15rem;margin-bottom:10px}
+.atras p{margin:0;font-size:.95rem;line-height:1.5}
+.flip:nth-child(2) .frente{background:linear-gradient(145deg,#2a2a40,#1d3a4f)}
+.flip:nth-child(3) .frente{background:linear-gradient(145deg,#3a2a40,#4f2f55)}
+.flip:nth-child(4) .frente{background:linear-gradient(145deg,#4a2f2f,#3a2255)}
+.flip:nth-child(5) .frente{background:linear-gradient(145deg,#2f2a4a,#4a3a2a)}
+.flip:nth-child(6) .frente{background:linear-gradient(145deg,#0f1a33,#1d2a4a)}
+.flip:nth-child(7) .frente{background:linear-gradient(145deg,#4a3a22,#2d2050)}
+.flip:nth-child(8) .frente{background:linear-gradient(145deg,#3a2a50,#5a3a22)}
+.flip:nth-child(9) .frente{background:linear-gradient(145deg,#1d3a4f,#3a2255)}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;width:min(1180px,92%);margin:0 auto;padding:56px 0}
+.fila .lista h2{margin-bottom:20px}
+.lista li{padding:5px 0 5px 34px;position:relative}
+.lista.avion li::before{content:"\2708";position:absolute;left:0;color:var(--violeta);font-size:1.3rem}
+.lista.trofeo li::before{content:"\1F3C6";position:absolute;left:0}
+.lista.medalla li::before{content:"\1F3C5";position:absolute;left:0}
+.lista h4{color:var(--violeta);font-size:1.05rem;margin:18px 0 4px}
+.lista h4:first-of-type{margin-top:0}
+.lista.avion li{font-size:1.2rem}
+.deco{position:relative;min-height:340px;border-radius:14px 14px 0 0;border-bottom:16px solid var(--oro);background:linear-gradient(135deg,var(--violeta-claro),var(--violeta-oscuro));display:grid;place-items:center;overflow:hidden}
+.deco::before{content:"";position:absolute;left:-10%;top:-20%;width:70%;height:60%;background:rgba(255,255,255,.14);transform:rotate(-24deg)}
+.deco span{position:relative;font-size:clamp(4rem,9vw,7rem)}
+.fila.inv .deco{order:-1}
+.por-filo{background:#fff;color:var(--texto);padding:56px 0}
+.por-filo .integra{color:var(--violeta)}
+.por-filo .filo-texto h2{color:var(--oro)}
+.por-filo .filo-texto p b{color:var(--violeta)}
+.banner-final{width:min(1180px,92%);margin:30px auto 70px;background:linear-gradient(120deg,var(--violeta-oscuro),var(--violeta-medio));color:#fff;text-align:center;padding:clamp(48px,8vw,90px) 20px;border-radius:14px}
+.banner-final h2{font-size:clamp(2rem,5vw,3.6rem);margin-bottom:22px}
+
+/* ============ UNIDADES HERMANAS ============ */
+.unidades{padding:60px 0 56px;text-align:center}
+.unidades-fila{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 34px;margin-top:30px}
+.unidades-fila span{font-family:var(--fuente-titulo);font-weight:800;font-size:1.25rem;padding:10px 18px;border-radius:10px;background:#faf7fd;border:1px solid #e3d8ee}
+.u1{color:#1b7a3d}.u2{color:#1a9c4a}.u3{color:#d4a017}.u4{color:#2a6fb5}.u5{color:#a02b8f}
+
+/* ============ PIE ============ */
+.pie{background:var(--violeta);color:#d9c9ea}
+.pie-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:36px;padding:56px 0 48px}
+.pie .logo{align-items:flex-start;color:#fff}
+.pie .logo-urn{font-size:3.4rem}
+.pie .logo-uni{font-size:.95rem}
+.pie ul{margin-top:22px}
+.pie ul a{display:block;color:var(--oro-claro);font-size:.95rem;padding:2px 0}
+.pie ul a::before{content:"- "}
+.pie ul a:hover{color:#fff}
+.pie h3{color:#fff;font-size:1.05rem;padding-bottom:12px;border-bottom:2px solid var(--oro);margin-bottom:16px}
+.pie p{margin:0 0 30px;font-size:.95rem;line-height:1.7}
+.legal{background:#1f1a24;color:#9c94a6;font-size:.9rem}
+.legal .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:24px 0}
+.legal .redes a{color:var(--oro);font-size:1.3rem;padding:0 8px}
+
+/* ============ RESPONSIVO ============ */
+@media (max-width:1050px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:74px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--violeta-oscuro);padding:8px 0;box-shadow:0 10px 20px rgba(0,0,0,.25)}
+  .links a{color:#fff;padding:14px 24px;border:0}
+  .links a.activo{color:var(--naranja)}
+  #menu-toggle:checked ~ .links{display:flex}
+  .campus-panel{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:900px){
+  .banners,.servicios{grid-template-columns:repeat(2,1fr)}
+  .bienvenida,.filo-grid,.fila,.contacto-grid{grid-template-columns:1fr}
+  .fila.inv .deco{order:0}
+  .bloques,.cards,.sedes{grid-template-columns:repeat(2,1fr)}
+  .pie-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .banners,.servicios,.bloques,.cards,.sedes,.pie-grid,.fila-2{grid-template-columns:1fr}
+  .campus-panel{grid-template-columns:repeat(2,1fr)}
+  .top-der{display:none}
+  .wa-texto{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BARRA SUPERIOR (versión de la página principal) ===== -->
+<div class="top top-full">
+  <div class="wrap">
+    <div class="top-izq">
+      <a href="mailto:promocion@urn.edu.mx">&#9993; promocion@urn.edu.mx</a>
+      <a href="tel:+526141410860">&#9742; (614) 141 0860</a>
+    </div>
+    <div class="top-der">
+      <a href="#contacto">Acceso</a>
+      <a href="#campus">&#9993; Chihuahua</a>
+      <a href="#campus">&#9993; Juárez</a>
+      <a class="btn-test" href="#contacto">¿No sabes qué estudiar?<br>Aplica nuestro test vocacional</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BARRA SUPERIOR (versión compacta de "¿Por qué URN?") ===== -->
+<div class="top top-compact">
+  <div class="wrap">
+    <div class="top-izq">
+      <a href="#contacto">Acceso</a>
+      <a href="#campus">Chihuahua</a>
+      <a href="#campus">Juárez</a>
+    </div>
+    <div class="redes">
+      <a href="#unidades" aria-label="Facebook">f</a>
+      <a href="#unidades" aria-label="Instagram">&#9678;</a>
+      <a href="tel:+526141410860" aria-label="Teléfono">&#9742;</a>
+      <a href="mailto:promocion@urn.edu.mx" aria-label="Correo">&#9993;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NAVEGACIÓN ===== -->
+<nav class="nav" aria-label="Navegación principal">
+  <a class="logo" href="#inicio" aria-label="URN Universidad, inicio">
+    <span class="logo-urn">URN</span><span class="logo-uni">UNIVERSIDAD</span>
+  </a>
+  <!-- Menú móvil con "checkbox hack" (solo CSS). Nota: no se cierra solo al elegir una opción. -->
+  <input type="checkbox" id="menu-toggle" class="sr" aria-label="Abrir menú">
+  <label for="menu-toggle" class="burger" aria-hidden="true">&#9776;</label>
+  <ul class="links">
+    <li><a class="activo" href="#inicio">Inicio</a></li>
+    <li><a class="activo-por" href="#por-que">¿Por qué URN?</a></li>
+    <li><a href="#licenciaturas">Licenciaturas</a></li>
+    <li><a href="#posgrados">Posgrados</a></li>
+    <li><a href="#campus">Campus</a></li>
+    <li><a href="#servicios">Servicios Escolares</a></li>
+    <li><a href="#unidades">Unidades</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ===== BOTONES FLOTANTES ===== -->
+<a class="wa" href="https://wa.me/526141410860" aria-label="Escríbenos por WhatsApp">
+  <span class="wa-icono">&#9990;</span><span class="wa-texto">Envíanos un mensaje</span>
+</a>
+<a class="up up-main" href="#inicio" aria-label="Volver arriba" style="display:flex">&#9650;</a>
+<a class="up up-por" href="#por-que" aria-label="Volver arriba">&#9650;</a>
+
+<!-- =========================================================
+     PÁGINA 1: PRINCIPAL
+     ========================================================= -->
+<main id="principal">
+
+  <header class="hero" id="inicio">
+    <div class="wrap hero-copy">
+      <p class="hero-pre">Te damos la bienvenida a</p>
+      <h1>Universidad Regional<br>del Norte</h1>
+    </div>
+    <div class="wrap campus-bar">
+      <span class="campus-etiqueta">Selecciona tu Campus:</span>
+      <div class="campus-panel">
+        <a href="#campus">Campus<br>Chihuahua</a>
+        <a href="#campus"><span class="cinta">PRÓXIMAMENTE</span>Campus II<br>Cantera 2027</a>
+        <a href="#campus">Campus<br>Cd. Juárez</a>
+        <a href="#campus">Campus<br>Cuauhtémoc</a>
+        <a href="#campus">Campus<br>Delicias</a>
+        <a href="#campus">Campus<br>Parral</a>
+        <a href="#campus">Campus Nvo.<br>Casas Grandes</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap banners">
+    <a class="banner" href="#servicios"><small>URN Cursos</small>Tu siguiente paso profesional empieza aquí</a>
+    <a class="banner" href="#licenciaturas"><small>Nuevas licenciaturas</small>Psicología, Diseño Gráfico y Contaduría</a>
+    <a class="banner" href="#contacto">¿No sabes qué estudiar?<span class="pildora">Aplica el test vocacional</span></a>
+    <a class="banner" href="#campus">Estudia<br>URN Aviación</a>
+  </div>
+
+  <section class="bienvenida" aria-label="Bienvenida">
+    <div class="bien-deco"><span>URN</span><em>Más de 35 años formando profesionistas</em></div>
+    <div class="bien-texto">
+      <h2>Bienvenid@s a URN</h2>
+      <p>La Universidad Regional del Norte (URN) es una institución educativa con más de 35 años de experiencia, comprometida con la formación integral de profesionales que contribuyan al desarrollo de México. Ubicada entre las 50 mejores universidades del país, la URN se destaca por su enfoque innovador y su compromiso con la excelencia académica.</p>
+    </div>
+  </section>
+
+  <section class="filosofia" aria-label="Nuestra filosofía">
+    <div class="wrap filo-grid">
+      <div class="integra">
+        <div class="petalos"><i></i><i></i><i></i><i></i><i></i></div>
+        <b>Integra</b><strong>2.0</strong>
+      </div>
+      <div class="filo-texto">
+        <h2>Nuestra Filosofía</h2>
+        <p class="frase">Que el alumno aprenda, aprenda a hacer, a hacerlo bien y aplicarlo integralmente.</p>
+        <p>Con la intención de simplificar las cargas académicas con las que se trabaja tradicionalmente, el Sistema Integra se distribuye de forma que el alumno curse en promedio solo 3 asignaturas simultáneamente. Las asignaturas se imparten en clases de 90 minutos por sesión, considerando siempre intervalos de descanso con una duración de máximo treinta minutos, lo que posibilita abordar temas completos y tener descansos que realmente relajen a los alumnos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloques" aria-label="Ventajas de estudiar en URN">
+    <article class="bloque-i"><div class="ico">&#127891;</div><h3>Titulación Automática</h3><p>Con nosotros, al aprobar la totalidad de los créditos académicos te titularás automáticamente.</p></article>
+    <article class="bloque-i"><div class="ico">&#128214;</div><h3>Sistema Integra,<br>Sistema Académico Único</h3><p>Sistema Integra con reconocimiento internacional diseñado por expertos.</p></article>
+    <article class="bloque-i"><div class="ico">&#128105;&#8205;&#127979;</div><h3>Docentes con gran experiencia</h3><p>Tu formación profesional está en las mejores manos. Serás capacitado por catedráticos altamente acreditados y con experiencia real en el ejercicio profesional.</p></article>
+    <article class="bloque-i"><div class="ico">&#129309;</div><h3>Sistema Interdisciplinario de Proyectos Empresariales</h3><p>Seminario interdisciplinario donde interactúan en el último semestre, alumnos de diversas licenciaturas, creando un proyecto útil para la comunidad.</p></article>
+    <article class="bloque-i"><div class="ico">&#128172;</div><h3>Inglés Integrado</h3><p>Por la importancia que tiene el inglés hoy en día, en nuestros programas académicos está incluido.</p></article>
+    <article class="bloque-i"><div class="ico">&#127942;</div><h3>Reconocimientos Nacionales e Internacionales</h3><p>Ven y forma parte de nuestros equipos representativos de la universidad en lo académico y deportivo.</p></article>
+    <article class="bloque-i"><div class="ico">&#128101;</div><h3>Grupos reducidos,<br>máximo 25 alumnos</h3><p>Gracias a nuestros grupos reducidos, la atención de nuestros docentes es personalizada con cada alumno.</p></article>
+    <article class="bloque-i"><div class="ico">&#128220;</div><h3>Certificaciones por talleres</h3><p>Certificación de competencias y habilidades necesarias en el alumno, desarrollándolo de una manera integral.</p></article>
+    <article class="bloque-i"><div class="ico">&#128681;</div><h3>Convenios Nacionales e Internacionales</h3><p>Contamos con diferentes oportunidades de intercambio académico tanto en instituciones educativas nacionales como internacionales, de acuerdo a los convenios que tenemos vigentes.</p></article>
+  </section>
+
+  <!-- Contenido de ejemplo: reemplazar con información oficial -->
+  <section class="seccion" id="licenciaturas">
+    <div class="wrap">
+      <h2 class="titulo-oro">Licenciaturas</h2>
+      <p class="intro">Elige tu carrera y estudia con el Sistema Integra: pocas materias a la vez, grupos reducidos e inglés incluido.</p>
+      <ul class="chips">
+        <li>Derecho</li><li>Ciencias de la Comunicación</li><li>Turismo</li><li>Diseño Gráfico</li>
+        <li>Psicología</li><li>Contaduría Pública</li><li>Negocios Internacionales</li><li>Comercio Exterior</li>
+        <li>Relaciones Industriales</li><li>Ingeniería Industrial en Calidad y Productividad</li>
+      </ul>
+      <p class="nota">Contenido de ejemplo: la oferta varía por campus.</p>
+    </div>
+  </section>
+
+  <section class="seccion gris" id="posgrados">
+    <div class="wrap">
+      <h2 class="titulo-oro">Posgrados</h2>
+      <p class="intro">Programas para profesionistas que quieren dar el siguiente paso en su carrera.</p>
+      <ul class="chips">
+        <li>Maestría en Dirección de las Organizaciones</li><li>Maestría en Dirección de la Producción y Operaciones</li>
+        <li>Maestría en Dirección Financiera</li><li>Maestría en Estrategia Educacional</li>
+        <li>Juicios Orales</li><li>Administración de Hospitales</li>
+      </ul>
+      <p class="nota">Contenido de ejemplo: la oferta varía por campus.</p>
+    </div>
+  </section>
+
+  <section class="seccion" id="campus">
+    <div class="wrap">
+      <h2 class="titulo-oro">Campus</h2>
+      <p class="intro">Presencia en seis ciudades del estado de Chihuahua, más un nuevo campus en Cantera que abrirá en 2027.</p>
+      <div class="sedes">
+        <article class="sede"><h3>Chihuahua</h3><p>Calle Allende No. 2628, Col. Zarco<br><a href="tel:+526144111451">(614) 411-14-51</a></p></article>
+        <article class="sede"><h3>Cd. Juárez</h3><p>Camino Viejo a San José No. 10051, Col. Partido Seneú<br><a href="tel:+526566872447">(656) 687-2447</a></p></article>
+        <article class="sede"><h3>Cuauhtémoc</h3><p>Km. 2 carretera Anáhuac, Col. Parque Industrial<br><a href="tel:+526255827588">(625) 582-7588</a></p></article>
+        <article class="sede"><h3>Delicias</h3><p>Calle 3a Sur y Av. 8a Sur #711<br><a href="tel:+526391004242">(639) 100 42 42</a></p></article>
+        <article class="sede"><h3>Parral</h3><p>Perimetral Sur Luis Donaldo Colosio, Km. 1920, Col. Cerro Blanco<br><a href="tel:+526275254000">(627) 525-4000</a></p></article>
+        <article class="sede"><h3>Nuevo Casas Grandes</h3><p>Libramiento Gómez Morín y Minerva No. 1410<br><a href="tel:+526366940873">(636) 694-0873</a></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion gris" id="servicios">
+    <div class="wrap">
+      <h2 class="titulo-oro">Servicios Escolares</h2>
+      <p class="intro">Trámites y apoyo para alumnos durante toda su carrera.</p>
+      <ul class="servicios">
+        <li><span>&#128221;</span>Inscripciones</li>
+        <li><span>&#128196;</span>Constancias y kárdex</li>
+        <li><span>&#127891;</span>Titulación</li>
+        <li><span>&#128220;</span>Reglamento</li>
+      </ul>
+      <p class="nota">Contenido de ejemplo.</p>
+    </div>
+  </section>
+
+  <section class="seccion" id="contacto">
+    <div class="wrap">
+      <h2 class="titulo-oro">Contacto</h2>
+      <div class="contacto-grid">
+        <div class="contacto-datos">
+          <p class="intro">Déjanos tus datos y un asesor te contactará para resolver tus dudas sobre admisión y colegiaturas.</p>
+          <p><b>Correo:</b> <a href="mailto:promocion@urn.edu.mx">promocion@urn.edu.mx</a></p>
+          <p><b>Teléfono:</b> <a href="tel:+526141410860">(614) 141 0860</a></p>
+        </div>
+        <!-- Formulario sin servidor: abre el correo del usuario. Validación nativa del navegador. -->
+        <form class="formulario" action="mailto:promocion@urn.edu.mx" method="post" enctype="text/plain">
+          <div><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" type="text" required minlength="3"></div>
+          <div class="fila-2">
+            <div><label for="correo">Correo</label><input id="correo" name="correo" type="email" required></div>
+            <div><label for="tel">Teléfono</label><input id="tel" name="telefono" type="tel" required pattern="[0-9 ()+\-]{8,}"></div>
+          </div>
+          <div class="fila-2">
+            <div><label for="sede">Campus de interés</label>
+              <select id="sede" name="campus" required><option value="">Elige uno</option><option>Chihuahua</option><option>Cd. Juárez</option><option>Cuauhtémoc</option><option>Delicias</option><option>Parral</option><option>Nuevo Casas Grandes</option></select></div>
+            <div><label for="carrera">Carrera de interés</label>
+              <select id="carrera" name="carrera" required><option value="">Elige una</option><option>Derecho</option><option>Ciencias de la Comunicación</option><option>Turismo</option><option>Diseño Gráfico</option><option>Psicología</option><option>Contaduría Pública</option><option>Negocios Internacionales</option><option>Otra</option></select></div>
+          </div>
+          <div><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" rows="4"></textarea></div>
+          <div><button class="btn" type="submit">Enviar solicitud</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     PÁGINA 2: ¿POR QUÉ URN?  (oculta hasta elegirla en la barra)
+     ========================================================= -->
+<section id="por-que" aria-label="¿Por qué estudiar en URN?">
+
+  <div class="por-banner">
+    <div class="wrap"><h1>¿Por qué estudiar<br>en URN?</h1></div>
+  </div>
+
+  <div class="wrap atajos">
+    <a href="#convenios">Convenios Internacionales</a>
+    <a href="#premios">Premios Nacionales</a>
+    <a href="#deportes">Logros Deportivos</a>
+    <a href="#filosofia">Nuestra Filosofía</a>
+    <a href="#criterios">Criterios de Evaluación</a>
+    <a href="#dies">Sistema DIES</a>
+  </div>
+
+  <!-- Tarjetas que dan la vuelta al pasar el mouse (o al enfocar / tocar) -->
+  <div class="cards">
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#127891;</div><h3>Titulación Automática</h3></div>
+      <div class="cara atras"><h3>Titulación Automática</h3><p>Con nosotros, al aprobar la totalidad de los créditos académicos te titularás automáticamente.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#128214;</div><h3>Sistema Integra<br>Sistema Académico Único</h3></div>
+      <div class="cara atras"><h3>Sistema Integra, Sistema Académico Único</h3><p>Sistema Integra con reconocimiento internacional diseñado por expertos.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#128105;&#8205;&#127979;</div><h3>Docentes con gran experiencia</h3></div>
+      <div class="cara atras"><h3>Docentes con gran experiencia</h3><p>Tu formación profesional está en las mejores manos. Serás capacitado por catedráticos altamente acreditados y con experiencia real en el ejercicio profesional.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#129309;</div><h3>Desarrollo de Proyectos Empresariales</h3></div>
+      <div class="cara atras"><h3>Sistema Interdisciplinario de Proyectos Empresariales</h3><p>Seminario interdisciplinario donde interactúan en el último semestre, alumnos de diversas licenciaturas, creando un proyecto útil para la comunidad.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#128172;</div><h3>Inglés Integrado</h3></div>
+      <div class="cara atras"><h3>Inglés Integrado</h3><p>Por la importancia que tiene el inglés hoy en día, en nuestros programas académicos está incluido.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#127942;</div><h3>Reconocimientos Nacionales e Internacionales</h3></div>
+      <div class="cara atras"><h3>Reconocimientos Nacionales e Internacionales</h3><p>Ven y forma parte de nuestros equipos representativos de la universidad en lo académico y deportivo.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#128101;</div><h3>Grupos reducidos, máximo 25 alumnos</h3></div>
+      <div class="cara atras"><h3>Grupos reducidos, máximo 25 alumnos</h3><p>Gracias a nuestros grupos reducidos, la atención de nuestros docentes es personalizada con cada alumno.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#128220;</div><h3>Certificaciones por talleres</h3></div>
+      <div class="cara atras"><h3>Certificaciones por talleres</h3><p>Certificación de competencias y habilidades necesarias en el alumno, desarrollándolo de una manera integral.</p></div>
+    </div></div>
+    <div class="flip" tabindex="0"><div class="flip-in">
+      <div class="cara frente"><div class="ico">&#128681;</div><h3>Convenios Nacionales e Internacionales</h3></div>
+      <div class="cara atras"><h3>Convenios Nacionales e Internacionales</h3><p>Contamos con diferentes oportunidades de intercambio académico tanto en instituciones educativas nacionales como internacionales, de acuerdo a los convenios que tenemos vigentes.</p></div>
+    </div></div>
+  </div>
+
+  <div class="fila" id="convenios">
+    <div class="lista avion">
+      <h2 class="titulo-oro">Convenios Internacionales</h2>
+      <ul>
+        <li>Universidad Federal de Paraná (Brasil)</li>
+        <li>Universidad Ajman (Arabia)</li>
+        <li>Universidad de Texas en El Paso UTEP (Estados Unidos)</li>
+        <li>Universidad Telemática Pegaso (Italia)</li>
+        <li>Universidad Pontificia Bolivariana (Colombia)</li>
+      </ul>
+    </div>
+    <div class="deco" aria-hidden="true"><span>&#127758;</span></div>
+  </div>
+
+  <div class="fila inv" id="premios">
+    <div class="lista trofeo">
+      <h2 class="titulo-oro">Premios nacionales</h2>
+      <ul>
+        <li>1er Lugar Concurso Nacional de Mediación</li>
+        <li>2do Lugar Concurso Nacional de Juicios Orales</li>
+        <li>5to Lugar Concurso Nacional de Juicios Orales</li>
+        <li>Premio nacional de cine cortocinema La Salle 2017 con documental "Varados" (Ciencias de la comunicación)</li>
+        <li>Premio estatal campaña de concientización "Ford drive skills" (Ciencias de la comunicación)</li>
+        <li>Cuarto lugar internacional en litigación de Juicios Orales en Córdoba Argentina 2018, de 36 países participantes (Licenciatura en Derecho)</li>
+        <li>Segundo lugar nacional III competencia nacional de litigación oral ABA ROLI México-Inacipe (Licenciatura en Derecho)</li>
+        <li>Premio estatal consecutivo "Lo mejor de mi ciudad" edición 2017, 2018 y 2019</li>
+      </ul>
+    </div>
+    <div class="deco" aria-hidden="true"><span>&#9878;&#65039;</span></div>
+  </div>
+
+  <div class="fila" id="deportes">
+    <div class="lista medalla">
+      <h2 class="titulo-oro">Logros Deportivos</h2>
+      <h4>Box</h4>
+      <ul><li>3er Lugar CONDDE (Noviembre 2016)</li><li>3er Lugar Universiada Nacional (Mayo 2017)</li><li>8vo Lugar LD (2017)</li></ul>
+      <h4>Triatlón</h4>
+      <ul><li>1er Lugar Universiada Estatal (Marzo 2017)</li><li>2do Lugar Triatlón Laet (2017)</li></ul>
+      <h4>Karate</h4>
+      <ul><li>1er Lugar Universiada Estatal (Marzo 2017)</li><li>2do Lugar LD (2017)</li></ul>
+      <h4>Voleibol Varonil</h4>
+      <ul><li>1er Lugar Nacional Sub 23 (Abril 2016)</li><li>1er Lugar Nacional Sub 23 (Abril 2017)</li><li>2do Lugar Universiada Nacional (Mayo 2017)</li><li>2do lugar Universiada Nacional Voleibol</li><li>3er Lugar Universiada Nacional (Mayo 2017)</li></ul>
+      <h4>Voleibol Femenil</h4>
+      <ul><li>1er lugar universiada Nacional voleibol de playa y sala</li><li>1er Lugar Estatal 2da Fuerza (Septiembre 2016)</li><li>1er Lugar Nacional Sub 23 (Abril 2017)</li><li>2do lugar Liga Mexicana de Voleibol</li></ul>
+      <h4>Fútbol Soccer Varonil</h4>
+      <ul><li>1er Lugar Liga San Felipe (Junio 2016)</li><li>1er lugar liga San Felipe Fútbol Rama Varonil</li><li>3er Lugar Universiada Estatal (Marzo 2017)</li></ul>
+      <h4>Fútbol Rápido Varonil</h4>
+      <ul><li>1er Lugar Copa Palomar (Diciembre 2016)</li><li>1er lugar liga Tec Fútbol Rápido</li><li>3er Lugar Universiada Estatal (Febrero 2017)</li></ul>
+    </div>
+    <div class="deco" aria-hidden="true"><span>&#9917;</span></div>
+  </div>
+
+  <div class="por-filo" id="filosofia">
+    <div class="wrap filo-grid">
+      <div class="integra">
+        <div class="petalos"><i></i><i></i><i></i><i></i><i></i></div>
+        <b>Integra</b><strong>2.0</strong>
+      </div>
+      <div class="filo-texto">
+        <h2>Nuestra Filosofía</h2>
+        <p class="frase">Que el alumno aprenda, aprenda a hacer, a hacerlo bien y aplicarlo integralmente.</p>
+        <p>Con la intención de simplificar las cargas académicas con las que se trabaja tradicionalmente, el Sistema Integra se distribuye de forma que el alumno curse en promedio <b>solo 3 asignaturas simultáneamente</b>. Las asignaturas se imparten en <b>clases de 90 minutos por sesión, considerando siempre intervalos de descanso con una duración de máximo treinta minutos</b>, lo que posibilita abordar temas completos y tener descansos que realmente relajen a los alumnos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido de ejemplo: reemplazar con información oficial -->
+  <div class="seccion gris" id="criterios">
+    <div class="wrap">
+      <h2 class="titulo-oro">Criterios de Evaluación</h2>
+      <p class="intro">La evaluación considera el desempeño del alumno a lo largo de cada asignatura: participación, trabajos, proyectos y exámenes.</p>
+      <p class="nota">Contenido de ejemplo: reemplázalo con los criterios oficiales.</p>
+    </div>
+  </div>
+
+  <div class="seccion" id="dies">
+    <div class="wrap">
+      <h2 class="titulo-oro">Sistema DIES</h2>
+      <p class="intro">Aquí se describe el Sistema DIES de la universidad y cómo apoya la formación de los alumnos.</p>
+      <p class="nota">Contenido de ejemplo: reemplázalo con la información oficial.</p>
+    </div>
+  </div>
+
+  <div class="banner-final">
+    <h2>Colegiaturas a tu alcance</h2>
+    <a class="btn" href="#contacto">Quiero información</a>
+  </div>
+
+</section>
+
+<!-- =========================================================
+     COMPARTIDO: UNIDADES HERMANAS Y PIE DE PÁGINA
+     ========================================================= -->
+<section class="unidades" id="unidades">
+  <div class="wrap">
+    <h2 class="titulo-oro">Unidades hermanas</h2>
+    <div class="unidades-fila">
+      <span class="u1">Colegio Regional Bilingüe</span>
+      <span class="u2">UDECH</span>
+      <span class="u3">Ángel Trías Preparatoria</span>
+      <span class="u4">Ciencias Paramédicas</span>
+      <span class="u5">Membresía Integra</span>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="wrap pie-grid">
+    <div>
+      <div class="logo"><span class="logo-urn">URN</span><span class="logo-uni">UNIVERSIDAD</span></div>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#por-que">¿Por qué URN?</a></li>
+        <li><a href="#licenciaturas">Licenciaturas</a></li>
+        <li><a href="#posgrados">Posgrados</a></li>
+        <li><a href="#campus">Campus</a></li>
+        <li><a href="#servicios">Servicios Escolares</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#servicios">Reglamento</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Chihuahua</h3>
+      <p>Calle Allende No. 2628<br>Col. Zarco<br>(614) 411-14-51</p>
+      <h3>Cd. Juárez</h3>
+      <p>Camino Viejo a San José No. 10051<br>Col. Partido Seneú<br>(656) 687-2447 / 687-0678 / 687-2446</p>
+    </div>
+    <div>
+      <h3>Nuevo Casas Grandes</h3>
+      <p>Libramiento Gómez Morín y Minerva No. 1410<br>(636) 694-0873</p>
+      <h3>Cuauhtémoc</h3>
+      <p>Km. 2 carretera Anáhuac<br>Col. Parque Industrial<br>(625) 582-7588 / 112-1801</p>
+    </div>
+    <div>
+      <h3>Parral</h3>
+      <p>Perimetral Sur Luis Donaldo Colosio<br>Km. 1920, Col. Cerro Blanco<br>(627) 525-4000</p>
+      <h3>Delicias</h3>
+      <p>Calle 3a Sur y Av. 8a Sur #711<br>(639) 100 42 42</p>
+    </div>
+  </div>
+  <div class="legal">
+    <div class="wrap">
+      <span>&copy; 2026 URN Todos los derechos reservados | Proyecto escolar</span>
+      <span class="redes"><a href="#unidades" aria-label="Facebook">f</a><a href="#unidades" aria-label="Instagram">&#9678;</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
